@@ -9,6 +9,7 @@
   "author": "Jan Kaderabek",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.17.1",
     "pm2": "^4.4.0"
   }
 }
