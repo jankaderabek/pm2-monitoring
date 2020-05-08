@@ -1,0 +1,14 @@
+{
+  "name": "pm2-api",
+  "version": "1.0.0",
+  "description": "Simple HTTP sever which provides pm2 processes informations",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jan Kaderabek",
+  "license": "ISC",
+  "dependencies": {
+    "pm2": "^4.4.0"
+  }
+}
