@@ -22,12 +22,21 @@ export class ProcessRecordsUpdater {
     const servers = await this.serverRepository.find()
 
     for (const server of servers) {
-      const response = await this.httpService.get(`http://${server.ip}:3004/pm2`).toPromise()
+      let response
+
+      try {
+        response = await this.httpService.get(`http://${server.ip}:3004/pm2`).toPromise()
+      } catch (e) {
+        console.log('Error when fetching data from server')
+
+        return
+      }
 
       for (const process of response.data) {
         const processRecord = new ProcessRecord()
         processRecord.name = process.name
         processRecord.status = process.pm2_env.status
+        processRecord.server = server
 
         await this.processRecordRepository.save(processRecord)
       }

@@ -23,15 +23,12 @@ export class ProcessController {
 
   @Get('/list')
   async list () {
-    return this.processRecordRepository.find()
+    return this.processRecordRepository.createQueryBuilder()
+      .leftJoinAndSelect('ProcessRecord.server', 'server')
+      .orderBy('ProcessRecord.id', 'DESC')
+      .groupBy('ProcessRecord.name')
+      .having('MAX(ProcessRecord.id)')
+      .getMany()
   }
 
-  @Get('/actual')
-  async actual () {
-    return this.processRecordRepository.findOne({
-      order: {
-        id: "DESC"
-      }
-    })
-  }
 }
