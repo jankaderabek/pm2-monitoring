@@ -29,14 +29,25 @@ export class ProcessRecordsUpdater {
       } catch (e) {
         console.log('Error when fetching data from server')
 
-        return
+        continue
       }
 
       for (const process of response.data) {
+        const axmMonitor = process.pm2_env.axm_monitor
+
         const processRecord = new ProcessRecord()
         processRecord.name = process.name
         processRecord.status = process.pm2_env.status
         processRecord.server = server
+        processRecord.mode = process.pm2_env.exec_mode
+        processRecord.instances = process.pm2_env.instances
+        processRecord.runningFor = moment().diff(moment(process.pm2_env.pm_uptime))
+        processRecord.restart = process.pm2_env.restart_time
+        processRecord.cpu = process.monit.cpu
+        processRecord.memory = process.monit.memory
+        processRecord.httpMeanLatency = axmMonitor['HTTP Mean Latency']?.['value'] ?? null
+        processRecord.requestsPerMinute = axmMonitor['HTTP']?.['value'] ?? null
+
 
         await this.processRecordRepository.save(processRecord)
       }

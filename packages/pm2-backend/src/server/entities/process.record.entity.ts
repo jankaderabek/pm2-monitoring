@@ -13,8 +13,34 @@ export class ProcessRecord {
   name: string
 
   @Column()
+  mode: string
+
+  @Column()
   status: string
 
   @CreateDateColumn()
   timestamp: Date
+
+  @Column()
+  instances: number
+
+  @Column()
+  runningFor: number
+
+  @Column()
+  restart: number
+
+  @Column()
+  cpu: number
+
+  @Column()
+  memory: number
+
+  @Column({ nullable: true })
+  httpMeanLatency: number | null
+
+  @Column({ nullable: true })
+  requestsPerMinute: number | null
+
+
 }
