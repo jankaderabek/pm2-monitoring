@@ -1,6 +1,4 @@
 import {Controller, Get, HttpService} from '@nestjs/common';
-import {map} from "rxjs/operators";
-import {InMemoryDBService} from "@nestjs-addons/in-memory-db";
 import {InjectRepository} from "@nestjs/typeorm";
 import {ProcessRecord} from "../entities/process.record.entity";
 import {Repository} from "typeorm";
@@ -21,8 +19,7 @@ export class ProcessListController {
   @Get()
   async list () {
     const servers = await this.serverRepository.find()
-
-    let serversResponse = []
+    const serversResponse = [];
 
     for (const server of servers) {
       const processes = await this.processRecordRepository.createQueryBuilder()
