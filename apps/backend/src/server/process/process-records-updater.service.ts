@@ -17,7 +17,7 @@ export class ProcessRecordsUpdater {
     private httpService: HttpService
   ) {}
 
-  @Interval(5000)
+  @Interval(15000)
   async detail () {
     const servers = await this.serverRepository.find()
 
@@ -54,7 +54,7 @@ export class ProcessRecordsUpdater {
     }
   }
 
-  @Interval(10000)
+  @Interval(60000)
   async deleteOld () {
     const deleteFrom = moment().utc().subtract(5, 'minutes')
 
