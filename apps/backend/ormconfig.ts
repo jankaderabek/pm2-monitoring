@@ -6,7 +6,7 @@ const config: ConnectionOptions = {
   synchronize: true,
   entities: [__dirname + '/**/*.entity{.ts,.js}', 'node_modules/nestjs-admin/**/*.entity.js'],
   migrationsRun: true,
-  logging: ["query", "error"],
+  logging: ["error"],
   logger: 'file',
 
   // Allow both start:prod and start:dev to use migrations

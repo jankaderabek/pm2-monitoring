@@ -125,7 +125,7 @@ import Vue from 'vue'
 export default Vue.extend({
   async fetch() {
     this.servers = await this.$axios.$get(
-      'http://localhost:3000/servers/process-list'
+      '/servers/process-list'
     )
   },
   data() {
